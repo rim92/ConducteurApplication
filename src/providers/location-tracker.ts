@@ -5,6 +5,14 @@ import {Http,Headers,RequestOptions} from '@angular/http';
 import 'rxjs/Rx';
  import { BackgroundGeolocation,BackgroundGeolocationConfig } from '@ionic-native/background-geolocation';
  declare var google: any;
+ import {createClass} from "asteroid";
+
+const Asteroid = createClass();
+// Connect to a Meteor backend 
+const asteroid = new Asteroid({
+    endpoint: "ws://localhost:3000/websocket"
+});
+
 @Injectable()
 export class LocationTracker {
 
@@ -116,11 +124,24 @@ this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code =
 	// });
 
 this.load(position.coords.latitude,position.coords.longitude);
-this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json()).subscribe(data => {
-   
+//this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json()).subscribe(data => {
+
+
+asteroid.call('getLatLngDepart',this.lat,this.lng).then(function (data:any) {
+
 this.test=data.results[0].formatted_address;
 console.log(data.results[0].formatted_address);
-	});
+}).catch(function (error:any) {
+return error;
+});
+
+
+
+
+
+
+
+//	});
 
 
 

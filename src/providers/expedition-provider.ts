@@ -5,6 +5,14 @@ import { Storage } from '@ionic/storage';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
+import {createClass} from "asteroid";
+
+const Asteroid = createClass();
+// Connect to a Meteor backend 
+const asteroid = new Asteroid({
+    endpoint: "ws://localhost:3000/websocket"
+});
+
 @Injectable()
 export class ExpeditionProvider {
 
@@ -22,10 +30,19 @@ public testexp:any=[];
   getExpediteurs() {
     
 
+asteroid.call('getAllExpediteurs').then(function (res:any) {
+ return res;
+}).catch(function (error:any) {
+return error;
+});
 
-return this.http.get("http://localhost:3000/api/expeditions")
-       .toPromise()
-       .then(res => res.json(), err => console.log(err));
+
+
+
+
+// return this.http.get("http://localhost:3000/api/expeditions")
+//        .toPromise()
+//        .then(res => res.json(), err => console.log(err));
 
   };
 

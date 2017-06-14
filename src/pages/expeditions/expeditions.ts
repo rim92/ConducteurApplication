@@ -74,7 +74,7 @@ test:any;
   
 
   ionViewDidLoad() {
-   this.expeditionprovider.getExpediteurs().then(data => this.expediteurs = data);
+ this.expediteurs=  this.expeditionprovider.getExpediteurs();
 
 this.locationTracker.startTracking();
 console.log(this.locationTracker);

@@ -6,9 +6,8 @@ import { LocationTracker } from '../../providers/location-tracker';
 import { Storage } from '@ionic/storage';
 import {Http} from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/map';
 import {createClass} from "asteroid";
-
+import 'rxjs/Rx';
 /*
   To learn how to use third party libs in an
   Ionic app check out our docs here: http://ionicframework.com/docs/v2/resources/third-party-libs/
@@ -89,9 +88,11 @@ var self=this;
 // });
 
 
-
-
-
+// var t=asteroid.subscribe("users");
+// t.on('FirstEvent', function (data:any) {
+//     console.log('First subscriber: ' + data);
+// });
+// console.log(t);
     //console.log(z);
  this.storage.get('idUser').then((user_id) => {
 console.log(user_id);
@@ -107,7 +108,7 @@ self.msg="Votre programme est vide";
 }
 else{
  self.ngZone.run(() => {
-asteroid.call('findId',res[0].expediteur_id).then(function (rest:any) {
+asteroid.call('findTempUserById',res[0].expediteur_id).then(function (rest:any) {
   self.expediteur= rest;
 console.log(self.expediteur);
 }).catch(function (error:any) {
