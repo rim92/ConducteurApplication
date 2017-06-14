@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favorites
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentFilter()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateSchedule()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list #scheduleList >
+<ion-label class="green" *ngIf="msg!=null">
+      {{msg}}
+        </ion-label>
+    <ion-item-group *ngFor="let offre of offres" >
+      
+      <ion-item-divider sticky>
+        <ion-label class="green">
+      {{offre.heure}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding  >
+
+        <ion-item>
+          <h3 class="green"> Date de la course :{{offre.date}}</h3>
+            <h3 class="green"> Votre montant :{{offre.montant}}</h3>
+           <ion-item-group   *ngFor="let exp of expediteur ">
+            <h3>{{exp.profile[0].nom}} &nbsp; {{exp.profile[0].prenom}}</h3>
+            <h3>Contact: &nbsp; {{exp.profile[0].num}}</h3> 
+             </ion-item-group>
+        </ion-item>
+
+      </ion-item-sliding>
+<button ion-button icon-left clear item-end (click)="startCourse(offre.expedition_id,offre.expediteur_id,offre._id)">
+      <ion-icon name="navigate"></ion-icon>
+      Commencer votre course
+    </button>
+    </ion-item-group>
+
+      <ion-item-divider sticky>
+      
+      </ion-item-divider>
+
+  </ion-list>
+
+
+
+
+</ion-content>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "875436571003",
+    "firebase_url": "https://myandroidapp-344ec.firebaseio.com",
+    "project_id": "myandroidapp-344ec",
+    "storage_bucket": "myandroidapp-344ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875436571003:android:81c44f99e2a048c8",
+        "android_client_info": {
+          "package_name": "com.ionic.fastruck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875436571003-kcgv5qqgvkq1tj32cso23qq2db6it25r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Wy2KeL6mGMvzKA00Kw7O0ecwBpjkAEE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

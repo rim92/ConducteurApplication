@@ -1,0 +1,49 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Ajouter devis</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content >
+
+
+	<form #offreForm="ngForm" novalidate >
+		<ion-list no-lines>
+			
+			<ion-item margin-bottom >
+				<ion-label ><h2>Montant</h2></ion-label>
+				<ion-input [(ngModel)]="offre.montant" name="montant" type="number"  required>
+				</ion-input>
+			</ion-item>
+			
+
+			<ion-item margin-bottom >
+				<ion-label class="lbl">Date</ion-label>
+			   <ion-datetime displayFormat="MMM DD, YYYY"  [(ngModel)]="offre.date" name="date"></ion-datetime>
+			</ion-item>
+
+				<ion-item margin-bottom >
+		        <ion-label>Heure</ion-label>
+				<ion-input [(ngModel)]="offre.heure" name="heure" type="time"  required>
+				</ion-input>
+			</ion-item>
+			
+		
+		</ion-list>
+
+		<ion-row responsive-sm>
+			
+			<ion-col>
+				<button ion-button full (click)="AddOffre(offreForm)" type="submit" color="primary"> Envoyer</button>
+
+			</ion-col>
+		</ion-row>
+	</form>
+
+</ion-content>
+
+
+

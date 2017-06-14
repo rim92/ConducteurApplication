@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Map</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="map-page">
+  <ion-spinner name="bubbles" *ngIf="positions==null"></ion-spinner>
+  <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div>
+  <button id='zoomto' class='btn-control' (click)='refresh()'>Voir ma position</button>
+</ion-content>

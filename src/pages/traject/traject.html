@@ -1,0 +1,46 @@
+<!--<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Login</ion-title>
+	</ion-navbar>
+</ion-header>-->
+
+<ion-content >
+	<div class="logo">
+		<img src="assets/img/appicon1.png" alt="Ionic logo">
+	</div>
+
+	<form #trajectForm="ngForm" novalidate >
+		<ion-list no-lines>
+			
+			<ion-item margin-bottom >
+				
+				<ion-input [(ngModel)]="traject.depart" name="email" type="email"  placeholder="DEPART" #username="ngModel" spellcheck="false" autocapitalize="off"
+				 	required>
+				</ion-input>
+			</ion-item>
+			
+
+			<ion-item margin-bottom >
+				
+				<ion-input [(ngModel)]="traject.destination" name="password" type="password" placeholder="DESTINATION" #password="ngModel" required>
+				</ion-input>
+			</ion-item>
+			
+		</ion-list>
+
+		<ion-row responsive-sm>
+			
+			<ion-col>
+				<button ion-button full (click)="addTraject()" type="submit" color="danger"> AJOUTER </button>
+
+			</ion-col>
+		</ion-row>
+	</form>
+
+</ion-content>
+
+
+

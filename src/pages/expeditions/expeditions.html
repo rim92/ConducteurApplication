@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favorites
+      </ion-segment-button>
+    
+    </ion-segment>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentFilter()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateSchedule()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<!--
+<ion-content>
+  <ion-input type="text" value="{{locationTracker.lat}}"></ion-input>
+<ion-input type="text" value="{{locationTracker.lng}}"></ion-input>
+
+
+
+</ion-content>-->
+
+
+<ion-item-divider  sticky>
+     <h2> <ion-icon name="pin" ></ion-icon> &nbsp; Vous êtes à :{{locationTracker.test}}</h2>
+    			
+      </ion-item-divider>
+      
+
+
+  
+<!--<ion-content>
+ 
+    <ion-list no-lines>
+        <ion-item *ngFor="let location of locations.data">
+            <ion-avatar item-left>
+                <ion-icon name="pin"></ion-icon>
+            </ion-avatar>
+            <h2>{{location.marchandises[0].lieu_expedition}}</h2>
+            <p>{{location.distanceKM}} miles</p>
+        </ion-item>
+    </ion-list>
+ 
+</ion-content>-->
+
+
+<ion-card *ngFor="let exp of locations.data">
+
+
+
+ 
+
+
+  <ion-item>
+        <!--<h3>Current Latitude: {{locationTracker.lat}}</h3>
+  <h3>Current Longitude: {{locationTracker.lng}}</h3>-->
+
+
+  <ion-fab right top>
+    <button ion-fab (click)="calculateAndDisplayRoute(exp.marchandises[0].lieu_expedition,exp.marchandises[0].lieu_livraison)" class="pin">
+      <ion-icon name="pin" ></ion-icon>
+    </button>
+  </ion-fab>
+ <h2>    <ion-icon name="pin" class="pin"></ion-icon> &nbsp;   <span  class="parag">De:</span> &nbsp;{{exp.marchandises[0].lieu_expedition}}</h2>
+<h2>   <ion-icon name="pin" class="pin" ></ion-icon> &nbsp;  <span class="parag">Vers:</span> &nbsp; {{exp.marchandises[0].lieu_livraison}}</h2>
+  </ion-item>
+
+ 
+
+  <ion-item>
+    <button item-left (click)="getDetail(exp._id)">VOIR</button>
+        <span item-right class="minute">{{exp.distance}}KM</span>
+    <!--<button ion-button icon-left clear item-right >
+      <ion-icon name="navigate" class="pinNav"></ion-icon>
+      ACTIVER
+    </button>-->
+<!--
+    <button ion-button icon-left  item-right color="primary" >
+      <ion-icon name="add" ></ion-icon>
+      Déposer devis
+    </button>-->
+    
+  </ion-item>
+
+</ion-card>
+<!--
+  <ion-list #scheduleList [hidden]="shownSessions === 0">
+
+    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+
+      <ion-item-divider sticky>
+        <ion-label>
+          {{group.time}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
+<ion-item>
+        
+          <h3>{{session.name}}</h3>
+          <p>
+            {{session.timeStart}} &mdash;
+            {{session.timeEnd}}:
+            {{session.location}}
+          <span>  <button ion-button (click)="goToSessionDetail(session)"  color="favorite">VOIR OFFRE</button></span>
+          </p>
+        
+</ion-item>
+        <ion-item-options>
+          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+            Favorite
+          </button>
+          <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')" *ngIf="segment === 'favorites'">
+            Remove
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-item-group>
+
+  </ion-list>-->
+<!--
+
+  <ion-fab bottom right #fab>
+    <button ion-fab (click)="start()"><ion-icon name="add" ></ion-icon></button>
+   
+  </ion-fab>-->
+
+
+</ion-content>
