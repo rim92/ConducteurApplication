@@ -17,6 +17,7 @@ import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
+import { MapDetailPage } from '../pages/map-detail/map-detail';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
@@ -47,6 +48,7 @@ import {MyDDPClient} from '../my-ddp-client';
     LoginPage,
     TrajectPage,
     MapPage,
+    MapDetailPage,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
@@ -86,6 +88,7 @@ import {MyDDPClient} from '../my-ddp-client';
   entryComponents: [
     ConferenceApp,
     AboutPage,
+    MapDetailPage,
     AccountPage,
     LoginPage,
     MapPage,
@@ -114,8 +117,7 @@ import {MyDDPClient} from '../my-ddp-client';
     SplashScreen,
     ExpeditionProvider,
     Locations,
-    OffreProvider,
-    MyDDPClient
+    OffreProvider   
     
   ]
 })

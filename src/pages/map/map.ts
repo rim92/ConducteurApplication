@@ -105,6 +105,8 @@ directionsService.route({
     this.ionViewDidLoad();
   }
 
+  
+
 
        calculateAndDisplayRoute() {
         var directionsService = new google.maps.DirectionsService;

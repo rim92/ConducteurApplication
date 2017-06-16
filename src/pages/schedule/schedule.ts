@@ -147,23 +147,7 @@ console.log(self.expediteur);
    
 
 
-// var tasks = asteroid.getCollection("Offres");
 
- 
-// 	  self.http.get("http://localhost:3000/api/accepted/"+data[0].profile[0].conducteur_id.toString()).map(res => res.json()).subscribe(data => {
-// this.offres=data;
-
-// if(data.length==0){
-// this.msg="Votre programme est vide";
-//   console.log("programme vide!");
-// }
-// else{
-//   var id=this.offres[0].expediteur_id;
-// self.offreprovider.getExpediteur(id).then(data => this.expediteur=data);
-// }
-
-// 	});
-     
 
 
 
@@ -182,17 +166,24 @@ console.log(self.expediteur);
 
   startCourse(idExpedition:string,conducteurId:string,offreId:string){
 
+var self=this;
+ asteroid.call('findExpeditionById',idExpedition).then(function (data:any) {
+console.log(data);
+
+self.navCtrl.push(MapPage,{lng_depart:data[0].marchandises[0].longitude_expedition,lat_depart:data[0].marchandises[0].latitude_expedition,lieu_livraison:data[0].marchandises[0].lieu_livraison});
 
 
-	  this.http.get("http://localhost:3000/api/expedition/"+idExpedition).map(res => res.json()).subscribe(data => {
-
-console.log(idExpedition);
-
-this.navCtrl.push(MapPage,{lng_depart:data[0].marchandises[0].longitude_expedition,lat_depart:data[0].marchandises[0].latitude_expedition,lieu_livraison:data[0].marchandises[0].lieu_livraison});
+self.locationtracker.addCourse(data[0].marchandises[0].longitude_expedition,data[0].marchandises[0].latitude_expedition,conducteurId,offreId);
 
 
-this.locationtracker.addCourse(data[0].marchandises[0].longitude_expedition,data[0].marchandises[0].latitude_expedition,conducteurId,offreId);
-	});
+
+}).catch(function (error:any) {
+  console.error('Error:', error);
+});
+
+
+
+
 
 // var self=this;
 

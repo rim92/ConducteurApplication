@@ -51,52 +51,54 @@ course: {longitude_center?:string,latitude_center?:string,longitude_position?:st
     interval: 2000 
   };
  
-  this.backgroundGeolocation.configure(config).subscribe((location) => {
+//   this.backgroundGeolocation.configure(config).subscribe((location) => {
  
-//this.data=this.test(location.latitude,location.longitude);
+// //this.data=this.test(location.latitude,location.longitude);
 
 
-    console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
+//     console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
    
-    // Run update inside of Angular's zone
-    this.zone.run(() => {
-      this.lat = location.latitude;
-      this.lng = location.longitude;
-  this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json().results).subscribe(data => {
+//     // Run update inside of Angular's zone
+//     this.zone.run(() => {
+//       this.lat = location.latitude;
+//       this.lng = location.longitude;
+//   this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json().results).subscribe(data => {
       
-this.test=data.formatted_address;
-	});
+// this.test=data.formatted_address;
+// 	});
 
 
-  this.load(location.latitude,location.longitude);
+//   this.load(location.latitude,location.longitude);
 
-//get distance of expeditions :
+// //get distance of expeditions :
 
-this.http.get("http://localhost:3000/api/expeditions").map(res => res.json()).subscribe(data => {
-console.log("teesst");
-var p1 = new google.maps.LatLng(this.data[0].marchandises[0].latitude_expedition,this.data[0].marchandises[0].latitude_livraison);
-console.log("p1"+p1);
-var p2 = new google.maps.LatLng( location.latitude,  location.longitude)
-console.log("p2"+p2);
-this.resultatDistance=this.calcDistance(p1, p2);
-	console.log("dist"+this.resultatDistance);
-
-},
-
- err => console.log(err));
+// //this.http.get("http://localhost:3000/api/expeditions").map(res => res.json()).subscribe(data => {
 
 
 
+// var p1 = new google.maps.LatLng(this.data[0].marchandises[0].latitude_expedition,this.data[0].marchandises[0].latitude_livraison);
+// console.log("p1"+p1);
+// var p2 = new google.maps.LatLng( location.latitude,  location.longitude)
+// console.log("p2"+p2);
+// this.resultatDistance=this.calcDistance(p1, p2);
+// 	console.log("dist"+this.resultatDistance);
 
-});
+// //},
+
+//  //err => console.log(err));
+
+
+
+
+// });
 
    
  
-  }, (err) => {
+  // }, (err) => {
  
-    console.log(err);
+  //   console.log(err);
  
-  });
+  // });
  
   // Turn ON the background-geolocation system.
   this.backgroundGeolocation.start();
@@ -112,7 +114,7 @@ let options = {
 this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
  
   console.log(position);
-  
+ 
   // Run update inside of Angular's zone
   this.zone.run(() => {
     this.lat = position.coords.latitude;
@@ -122,26 +124,18 @@ this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code =
   //      console.log(this.test);
 
 	// });
-
+ var self=this;
 this.load(position.coords.latitude,position.coords.longitude);
-//this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json()).subscribe(data => {
+this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&key=AIzaSyD1L8YZ760DljgYWqMd8n98w1nUAjjSptM").map(res => res.json()).subscribe(data => {
 
 
-asteroid.call('getLatLngDepart',this.lat,this.lng).then(function (data:any) {
-
-this.test=data.results[0].formatted_address;
+self.test=data.results[0].formatted_address;
 console.log(data.results[0].formatted_address);
-}).catch(function (error:any) {
-return error;
-});
 
 
 
 
-
-
-
-//	});
+	});
 
 
 
@@ -155,7 +149,8 @@ return error;
 
 
   addCourse(longitude_expedition:string,latitude_expedition:string,idConducteur:string,offreId:string){
-
+     var self=this;
+console.log("jioojoi");
 // Turn ON the background-geolocation system.
   //this.backgroundGeolocation.start();
 
@@ -166,23 +161,14 @@ headers.append('Content-Type','application/json');
 let optionsHeader= new RequestOptions({headers:headers});
   // Foreground Tracking
  
-let options = {
-  frequency: 3000, 
-  enableHighAccuracy: true
-};
- 
-this.geolocation.watchPosition(options).subscribe((position: Geoposition) => {
- 
- console.log("pkOk");
-this.lat = position.coords.latitude;
-    this.lng = position.coords.longitude;
 
-        this.course={longitude_center:this.lng.toString(),latitude_center:this.lat.toString(),longitude_position:longitude_expedition.toString(),latitude_position:latitude_expedition.toString(),offre_id:offreId,conducteur_id:idConducteur};
+
+asteroid.call('getCourseById',offreId).then(function (data:any) {
 
 
 
 
-this.http.get("http://localhost:3000/api/course/"+offreId).map(res => res.json()).subscribe(data => {
+// this.http.get("http://localhost:3000/api/course/"+offreId).map(res => res.json()).subscribe(data => {
 
 // if(data!=null){
 
@@ -198,7 +184,7 @@ this.http.get("http://localhost:3000/api/course/"+offreId).map(res => res.json()
 // }
 
   // else{
-this.http.post("http://localhost:3000/api/addCourse", this.course,optionsHeader).subscribe(data => {
+self.http.post("http://localhost:3000/api/addCourse", self.course,optionsHeader).subscribe(data => {
  console.log(data);
 },
 error =>{
@@ -206,14 +192,16 @@ error =>{
 }
 )
 
-
+}).catch(function (error:any) {
+return error;
+});
 // }
 
-},
-error =>{
-  console.log(error)
-}
-)
+// },
+// error =>{
+//   console.log(error)
+// }
+// )
 
 
      
@@ -224,8 +212,6 @@ error =>{
   
 
 
-
-  });
       
 
 

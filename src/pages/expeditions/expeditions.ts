@@ -22,6 +22,7 @@ import { LocationTracker } from '../../providers/location-tracker';
 import { AboutPage } from '../about/about';
 import { Locations } from '../../providers/locations';
 import { MapPage } from '../map/map';
+import {MapDetailPage} from '../map-detail/map-detail';
 @Component({
   selector: 'page-expeditions',
   templateUrl: 'expeditions.html'
@@ -246,7 +247,7 @@ getTraject(){
   }
 
 calculateAndDisplayRoute(depart:string,livraison:string){
-    this.navCtrl.push(MapPage,{lieu_expedition:depart,lieu_livraison:livraison});
+    this.navCtrl.push(MapDetailPage,{lieu_expedition:depart,lieu_livraison:livraison});
 }
 
 
@@ -258,12 +259,7 @@ getDetail(id:string){
 
 }
 
-  start(){
-   // this.locationTracker.startTracking();
-console.log("okk");
-  this.navCtrl.push(MapPage);
-
-  }
+ 
  
   stop(){
     this.locationTracker.stopTracking();
