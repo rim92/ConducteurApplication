@@ -36,10 +36,10 @@ let options= new RequestOptions({headers:headers});
 
 
 this.http.get("http://localhost:3000/api/user/"+value).map(res => res.json()).subscribe(data => {
-console.log(data[0].profile[0].conducteur_id.toString());
+console.log(data[0].profile[0].conducteur_id);
 
 
-  this.offre={montant:this.offre.montant.toString(),date:this.offre.date,heure:this.offre.heure.toString(),conducteur_id:value,expedition_id:this.navParams.data._id,accepted:false,expediteur_id:null};
+  this.offre={montant:this.offre.montant.toString(),date:this.offre.date,heure:this.offre.heure,conducteur_id:data[0].profile[0].conducteur_id,expedition_id:this.navParams.data._id,accepted:false,expediteur_id:null};
 
 
 this.http.post("http://localhost:3000/api/devis", this.offre,options).subscribe(data => {

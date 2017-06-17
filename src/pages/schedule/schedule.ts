@@ -102,7 +102,7 @@ console.log(user_id);
  asteroid.call('acceptDevis',user_id).then(function (res:any) {
   console.log('devis:', res);
  self.offres=res;
-if(res==null){
+if(res.length==0){
 self.msg="Votre programme est vide";
   console.log("programme vide!");
 }

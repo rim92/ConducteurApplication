@@ -75,7 +75,7 @@ self.loginProvider.login(result);
 // ret.then(function (res:any) {
 //   console.log(res._id)
  
-//   self.navCtrl.push(TabsPage);
+  self.navCtrl.push(TabsPage);
 console.log(result);
 }).catch(function (error:any) {
   console.error('Error:', error);
